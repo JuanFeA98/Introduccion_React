@@ -1,0 +1,19 @@
+.ToDoList{
+    height: auto;
+    width: 100%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    text-align: center;
+    /* display: inline-block; */
+    /* text-align: left; */
+}
+
+.ToDoList ul{
+    width: 80%;
+    max-width: 350px;
+    list-style: none;
+    display: inline-table;
+    margin: 0;
+    padding: 0;
+}

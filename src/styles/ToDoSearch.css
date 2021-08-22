@@ -1,0 +1,21 @@
+.ToDoSearch{
+    height: 65px;
+    width: 100%;
+    /* background: purple; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ToDoSearch input{
+    width: 75%;
+    height: 22px;
+    border: 0px;
+    border-radius: 10px;
+    padding: 2px 12px;
+    box-shadow: 0px 4px 5px -3px rgba(0,0,0,0.75);
+}
+
+.ToDoSearch input:hover{
+    cursor: pointer;
+}

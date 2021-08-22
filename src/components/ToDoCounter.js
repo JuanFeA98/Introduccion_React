@@ -1,8 +1,16 @@
 import React from 'react';
+import '../styles/ToDoCounter.css'
 
 function ToDoCounter() {
     return(
-        <h2>Hello</h2>
+        <div className="ToDoCounter">
+            <p className='Saludo'>
+                Hola! 
+            </p>
+            <p className='Contador'>
+                Aquí estan los pendientes
+            </p>
+        </div>
     )
 }
 

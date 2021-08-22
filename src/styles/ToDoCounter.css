@@ -1,0 +1,20 @@
+.ToDoCounter{
+    height: 90px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ToDoCounter .Saludo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.ToDoCounter .Contador{
+    font-size: 1.2rem;
+}
