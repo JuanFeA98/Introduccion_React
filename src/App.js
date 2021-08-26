@@ -10,8 +10,8 @@ import ToDoHeader from './components/ToDoHeader';
 
 const todos = [
   {text:'Pendiente 1', completed:false},
-  {text:'Pendiente 2', completed:false},
-  {text:'Pendiente 3', completed:false},
+  {text:'Pendiente 2', completed:true},
+  {text:'Pendiente 3', completed:true},
   {text:'Pendiente 4', completed:false},
   {text:'Pendiente 5', completed:false},
 ]
@@ -24,7 +24,7 @@ function App() {
       <ToDoSearch/>
       <ToDoList>
         {todos.map(todo => (
-          <ToDoItem key={todo.text} text={todo.text}/>
+          <ToDoItem key={todo.text} text={todo.text} complete={todo.completed}/>
         ))}
       </ToDoList>
       <CreateToDoButton/>

@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.4px solid rgb(146, 146, 146);
+    border: 1.4px solid rgb(44, 44, 44);
 }
 
 .Close{
@@ -50,8 +50,13 @@
     transform: rotate(90deg);
 }
 
+.IconActive{
+    background: green;
+}
 
-
+.TextComplete{
+    text-decoration: line-through;
+}
 
 
 
