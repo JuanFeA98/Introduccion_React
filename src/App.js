@@ -8,23 +8,50 @@ import ToDoItem from './components/ToDoItem';
 import './styles/index.css';
 import ToDoHeader from './components/ToDoHeader';
 
-const todos = [
-  {text:'Pendiente 1', completed:false},
-  {text:'Pendiente 2', completed:true},
-  {text:'Pendiente 3', completed:true},
-  {text:'Pendiente 4', completed:false},
-  {text:'Pendiente 5', completed:false},
+const defaultToDos = [
+  {text:'La Rueda del Tiempo', completed:false},
+  {text:'Never let me go', completed:true},
+  {text:'Cien años de soledad', completed:true},
+  {text:'Battle Royale', completed:false},
+  {text:'Buda Blues', completed:false},
 ]
 
+
+
 function App() {
+  const [toDos, setToDos] = React.useState(defaultToDos);
+  const [searchValue, setSearchValue] = React.useState('');
+  
+  const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
+  const totalToDos = toDos.length;
+  
+  let searchedToDos = [];
+
+  if (!searchValue.length >= 1){
+    searchedToDos = toDos;
+  } else {
+    searchedToDos = toDos.filter(toDo =>{
+      const toDoText = toDo.text.toLowerCase()
+      const searchText = searchValue.toLowerCase()
+      return toDoText.includes(searchText)
+    })
+  }
+
   return (
     <React.Fragment>
       <ToDoHeader/>
-      <ToDoCounter/>
-      <ToDoSearch/>
+      <ToDoCounter total={totalToDos} completed={completedToDos}/>
+      <ToDoSearch 
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <ToDoList>
-        {todos.map(todo => (
-          <ToDoItem key={todo.text} text={todo.text} complete={todo.completed}/>
+        {searchedToDos.map(toDo => (
+          <ToDoItem 
+            key={toDo.text} 
+            text={toDo.text} 
+            complete={toDo.completed}
+          />
         ))}
       </ToDoList>
       <CreateToDoButton/>

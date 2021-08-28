@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/ToDoCounter.css'
 
-function ToDoCounter() {
+function ToDoCounter({ completed, total }) {
     return(
         <div className="ToDoCounter">
             <p className='Saludo'>
                 Hola! 
             </p>
             <p className='Contador'>
-                Aquí estan los pendientes
+                Has completado {completed} pendientes de {total}.
             </p>
         </div>
     )
