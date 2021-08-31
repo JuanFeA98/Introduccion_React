@@ -16,8 +16,6 @@ const defaultToDos = [
   {text:'Buda Blues', completed:false},
 ]
 
-
-
 function App() {
   const [toDos, setToDos] = React.useState(defaultToDos);
   const [searchValue, setSearchValue] = React.useState('');
@@ -37,6 +35,21 @@ function App() {
     })
   }
 
+  const completeToDo = (text)=>{
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+    const newToDos = [...toDos];
+    newToDos[toDoIndex].completed = true;
+    setToDos(newToDos)  
+  };
+
+
+  const deleteToDo = (text)=>{
+    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+    const newToDos = [...toDos];
+    newToDos.splice(toDoIndex, 1);
+    setToDos(newToDos)  
+  };
+
   return (
     <React.Fragment>
       <ToDoHeader/>
@@ -51,7 +64,9 @@ function App() {
             key={toDo.text} 
             text={toDo.text} 
             complete={toDo.completed}
-          />
+            onComplete={()=>completeToDo(toDo.text)}
+            onDelete={()=>deleteToDo(toDo.text)}
+            />
         ))}
       </ToDoList>
       <CreateToDoButton/>
