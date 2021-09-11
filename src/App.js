@@ -8,16 +8,26 @@ import ToDoItem from './components/ToDoItem';
 import './styles/index.css';
 import ToDoHeader from './components/ToDoHeader';
 
-const defaultToDos = [
-  {text:'La Rueda del Tiempo', completed:false},
-  {text:'Never let me go', completed:true},
-  {text:'Cien años de soledad', completed:true},
-  {text:'Battle Royale', completed:false},
-  {text:'Buda Blues', completed:false},
-]
+// const defaultToDos = [
+//   {text:'La Rueda del Tiempo', completed:false},
+//   {text:'Never let me go', completed:true},
+//   {text:'Cien años de soledad', completed:true},
+//   {text:'Battle Royale', completed:false},
+//   {text:'Buda Blues', completed:false},
+// ]
 
 function App() {
-  const [toDos, setToDos] = React.useState(defaultToDos);
+  const localStorageToDos = localStorage.getItem('TODOS_V1');
+  let parsedToDos;
+  
+  if (!localStorageToDos) {
+    localStorage.setItem('TODOS_V1', JSON.stringify([]))
+    parsedToDos = [];
+  } else {
+    parsedToDos = JSON.parse(localStorageToDos);
+  }
+
+  const [toDos, setToDos] = React.useState(parsedToDos);
   const [searchValue, setSearchValue] = React.useState('');
   
   const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
@@ -35,11 +45,18 @@ function App() {
     })
   }
 
+  const saveToDos = (newToDos) =>{
+    const stringToDos = JSON.stringify(newToDos);
+    localStorage.setItem('TODOS_V1', stringToDos);
+    
+    setToDos(newToDos)
+  }
+
   const completeToDo = (text)=>{
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
     const newToDos = [...toDos];
     newToDos[toDoIndex].completed = true;
-    setToDos(newToDos)  
+    saveToDos(newToDos)  
   };
 
 
@@ -47,7 +64,7 @@ function App() {
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
     const newToDos = [...toDos];
     newToDos.splice(toDoIndex, 1);
-    setToDos(newToDos)  
+    saveToDos(newToDos)  
   };
 
   return (
