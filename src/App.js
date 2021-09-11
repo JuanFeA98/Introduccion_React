@@ -8,26 +8,35 @@ import ToDoItem from './components/ToDoItem';
 import './styles/index.css';
 import ToDoHeader from './components/ToDoHeader';
 
-// const defaultToDos = [
-//   {text:'La Rueda del Tiempo', completed:false},
-//   {text:'Never let me go', completed:true},
-//   {text:'Cien años de soledad', completed:true},
-//   {text:'Battle Royale', completed:false},
-//   {text:'Buda Blues', completed:false},
-// ]
-
-function App() {
-  const localStorageToDos = localStorage.getItem('TODOS_V1');
-  let parsedToDos;
-  
-  if (!localStorageToDos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]))
-    parsedToDos = [];
+function useLocalStorage(itemName, initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+    
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue))
+    parsedItem = initialValue;
   } else {
-    parsedToDos = JSON.parse(localStorageToDos);
+    parsedItem = JSON.parse(localStorageItem);
+  }
+  
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) =>{
+    const stringItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringItem);
+    
+    setItem(newItem)
   }
 
-  const [toDos, setToDos] = React.useState(parsedToDos);
+  return [
+    item, 
+    saveItem
+  ]
+};
+
+function App() {
+  const [ toDos, saveToDos ] = useLocalStorage('TODOS_V1', []);
+
   const [searchValue, setSearchValue] = React.useState('');
   
   const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
@@ -45,12 +54,6 @@ function App() {
     })
   }
 
-  const saveToDos = (newToDos) =>{
-    const stringToDos = JSON.stringify(newToDos);
-    localStorage.setItem('TODOS_V1', stringToDos);
-    
-    setToDos(newToDos)
-  }
 
   const completeToDo = (text)=>{
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
