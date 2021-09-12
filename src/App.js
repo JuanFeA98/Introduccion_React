@@ -9,33 +9,58 @@ import './styles/index.css';
 import ToDoHeader from './components/ToDoHeader';
 
 function useLocalStorage(itemName, initialValue){
-  const localStorageItem = localStorage.getItem(itemName);
-  let parsedItem;
-    
-  if (!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify(initialValue))
-    parsedItem = initialValue;
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   
-  const [item, setItem] = React.useState(parsedItem);
+  const [item, setItem] = React.useState(initialValue);
+
+  React.useEffect(()=>{
+    setTimeout(()=>{
+      try {
+        const localStorageItem = localStorage.getItem(itemName);
+        let parsedItem;
+          
+        if (!localStorageItem) {
+          localStorage.setItem(itemName, JSON.stringify(initialValue))
+          parsedItem = initialValue;
+        } else {
+          parsedItem = JSON.parse(localStorageItem);
+        }
+  
+        setItem(parsedItem);
+        setLoading(false)
+      } catch (error) {
+        setError(error)
+      }
+    }, 2000)
+  },[]);
 
   const saveItem = (newItem) =>{
-    const stringItem = JSON.stringify(newItem);
-    localStorage.setItem(itemName, stringItem);
-    
-    setItem(newItem)
+    try {
+      const stringItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringItem);
+      
+      setItem(newItem)  
+    } catch (error) {
+      setError(error)
+    }
   }
 
-  return [
+  return {
     item, 
-    saveItem
-  ]
+    saveItem,
+    loading,
+    error
+  }
 };
 
 function App() {
-  const [ toDos, saveToDos ] = useLocalStorage('TODOS_V1', []);
+  const { 
+    item: toDos, 
+    saveItem: saveToDos,
+    loading,
+    error 
+  } = useLocalStorage('TODOS_V1', []);
 
   const [searchValue, setSearchValue] = React.useState('');
   
@@ -70,6 +95,15 @@ function App() {
     saveToDos(newToDos)  
   };
 
+  // console.log('Render antes del efecto')
+
+  // React.useEffect(()=>{
+  //   console.log('Algo paso!')
+  // }, [totalToDos]);
+
+  // console.log('Render luego del efecto')
+  
+
   return (
     <React.Fragment>
       <ToDoHeader/>
@@ -79,6 +113,10 @@ function App() {
         setSearchValue={setSearchValue}
       />
       <ToDoList>
+        {error && <p>Ocurrio un error</p>}
+        {loading && <p>Cargando...</p>}
+        {(!loading && !searchedToDos.length) && <p>Crea tu primer To Do!</p>}
+
         {searchedToDos.map(toDo => (
           <ToDoItem 
             key={toDo.text} 
