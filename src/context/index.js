@@ -30,14 +30,12 @@ function ToDoProvider(props){
     })
     }
 
-
     const completeToDo = (text)=>{
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
     const newToDos = [...toDos];
     newToDos[toDoIndex].completed = true;
     saveToDos(newToDos)  
     };
-
 
     const deleteToDo = (text)=>{
     const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
@@ -61,7 +59,6 @@ function ToDoProvider(props){
         }}>
             {props.children}
         </ToDoContext.Provider>
-
     )
 }
 
