@@ -2,14 +2,14 @@ import React from 'react';
 import '../styles/CreateToDoButton.css'
 
 function CreateToDoButton(props){
-    const onClickfunction = (mensaje) => {
-        console.log(mensaje)
-    }
+    // const onClickfunction = () => {
+    //     props.setOpenModal(true);
+    // }
     
     return(
         <button 
             className='CreateToDoButton'
-            onClick={()=>onClickfunction('Jumm')}
+            onClick={()=>props.setOpenModal(!props.openModal)}
         >
             +
         </button>

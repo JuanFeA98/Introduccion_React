@@ -9,6 +9,8 @@ import ToDoSearch from './components/ToDoSearch';
 import ToDoItem from './components/ToDoItem';
 import CreateToDoButton from './components/CreateToDoButton';
 
+import Modal from './modals/index';
+
 function AppUI(){
     const {
         error,
@@ -17,7 +19,9 @@ function AppUI(){
         completeToDo,
         deleteToDo,
         searchValue,
-        setSearchValue
+        setSearchValue,
+        openModal,
+        setOpenModal
     } = React.useContext(ToDoContext)
     
     return(
@@ -45,7 +49,17 @@ function AppUI(){
                         ))}
                     </ToDoList>
                 </React.Fragment>
-            <CreateToDoButton/>
+                
+                {!!openModal &&(
+                    <Modal classname='Modal'>
+                        <p>{searchedToDos[0]?.text}</p>
+                    </Modal>
+                )}
+
+            <CreateToDoButton
+                openModal = {openModal}
+                setOpenModal={setOpenModal}
+            />
         </React.Fragment>
     )
 }

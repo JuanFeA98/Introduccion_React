@@ -14,7 +14,8 @@ function ToDoProvider(props){
       } = useLocalStorage('TODOS_V1', []);
     
     const [searchValue, setSearchValue] = React.useState('');
-    
+    const [openModal, setOpenModal] = React.useState(false);
+
     const completedToDos = toDos.filter(toDo => !!toDo.completed).length;
     const totalToDos = toDos.length;
     
@@ -27,21 +28,20 @@ function ToDoProvider(props){
         const toDoText = toDo.text.toLowerCase()
         const searchText = searchValue.toLowerCase()
         return toDoText.includes(searchText)
-    })
-    }
+    })};
 
     const completeToDo = (text)=>{
-    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
-    const newToDos = [...toDos];
-    newToDos[toDoIndex].completed = true;
-    saveToDos(newToDos)  
+        const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+        const newToDos = [...toDos];
+        newToDos[toDoIndex].completed = true;
+        saveToDos(newToDos)  
     };
 
     const deleteToDo = (text)=>{
-    const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
-    const newToDos = [...toDos];
-    newToDos.splice(toDoIndex, 1);
-    saveToDos(newToDos)  
+        const toDoIndex = toDos.findIndex(toDo => toDo.text === text);
+        const newToDos = [...toDos];
+        newToDos.splice(toDoIndex, 1);
+        saveToDos(newToDos)  
     };
 
     return(
@@ -54,7 +54,9 @@ function ToDoProvider(props){
             searchedToDos,
             completeToDo,
             deleteToDo,
-            searchValue
+            searchValue,
+            openModal,
+            setOpenModal
             
         }}>
             {props.children}
