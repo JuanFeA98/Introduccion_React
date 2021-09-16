@@ -53,7 +53,6 @@ function AppUI(){
                 
                 {!!openModal &&(
                     <Modal classname='Modal'>
-                        {/* <p>{searchedToDos[0]?.text}</p> */}
                         <ToDoForm/>
                     </Modal>
                 )}
