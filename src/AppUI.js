@@ -10,6 +10,7 @@ import ToDoItem from './components/ToDoItem';
 import CreateToDoButton from './components/CreateToDoButton';
 
 import Modal from './modals/index';
+import ToDoForm from "./components/ToDoForm.js";
 
 function AppUI(){
     const {
@@ -52,7 +53,8 @@ function AppUI(){
                 
                 {!!openModal &&(
                     <Modal classname='Modal'>
-                        <p>{searchedToDos[0]?.text}</p>
+                        {/* <p>{searchedToDos[0]?.text}</p> */}
+                        <ToDoForm/>
                     </Modal>
                 )}
 
