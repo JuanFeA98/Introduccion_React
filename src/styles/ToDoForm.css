@@ -1,5 +1,50 @@
 .ToDoForm{
+    background: #118ab2;
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.ToDoForm label{
+    font-weight: bold;
+}
+
+.ToDoForm textarea{
+    width: 70%;
+    height: 60px;
+    border-radius: 10px;
+    margin: 25px 20px;
+    padding: 10px;
     /* background: red; */
-    width: 300px;
-    height: 150px;
+}
+
+.ToDoForm textarea:focus{
+    outline-color: #0a3442;
+}
+
+.Form-Buttons{
+    width: 75%;
+    height: 35px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Form-Buttons button{
+    width: 100px;
+    background: #0a3442;
+    border: 3px solid #0a3442;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.Form-Buttons button:hover{
+    background: white;
+    color: #0a3442;
+    cursor: pointer;
 }

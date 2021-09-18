@@ -27,13 +27,13 @@ export default function ToDoForm() {
 
     return (
         <form className='ToDoForm' onSubmit={onSubmit}>
-            <label></label>
+            <label>Ingresa un nuevo ToDo:</label>
             <textarea 
                 placeholder='Agregar'
                 value={newToDoValue}
                 onChange={onChange}
             />
-            <div>
+            <div className='Form-Buttons'>
                 <button
                     type='button'
                     onClick={onCancel}
