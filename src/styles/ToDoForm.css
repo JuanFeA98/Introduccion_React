@@ -7,19 +7,30 @@
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    border: 5px solid #0a3442;
+    box-shadow: 0px 2px 20px 1px rgba(255, 255, 255, 0.75);
 }
 
 .ToDoForm label{
     font-weight: bold;
+    font-size: 30px;
+    /* background: rgb(10, 52, 66, 0.75); */
+    /* border: 3px solid white; */
+    /* color: #0a3442; */
+    /* background: white; */
+    width: 60%;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .ToDoForm textarea{
     width: 70%;
     height: 60px;
     border-radius: 10px;
-    margin: 25px 20px;
+    margin: 15px 20px 25px 20px;
     padding: 10px;
-    /* background: red; */
+    box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.75);
 }
 
 .ToDoForm textarea:focus{
@@ -37,7 +48,7 @@
     width: 100px;
     background: #0a3442;
     border: 3px solid #0a3442;
-    border-radius: 7px;
+    border-radius: 20px;
     color: white;
     font-weight: bold;
     transition: 0.5s;

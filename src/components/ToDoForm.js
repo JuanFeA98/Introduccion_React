@@ -27,7 +27,7 @@ export default function ToDoForm() {
 
     return (
         <form className='ToDoForm' onSubmit={onSubmit}>
-            <label>Ingresa un nuevo ToDo:</label>
+            <label>Ingresa un nuevo ToDo</label>
             <textarea 
                 placeholder='Agregar'
                 value={newToDoValue}
